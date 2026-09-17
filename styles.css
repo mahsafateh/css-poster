@@ -50,6 +50,8 @@ body {
 }
 
 .hero__title {
+  position: absolute;
+  top: clamp(15rem, 12vh, 10rem);
   width: 0;
   margin: 0;
   overflow: hidden;
@@ -78,7 +80,7 @@ body {
   top: 1rem;
   left: 1rem;
   z-index: 1;
-  width: clamp(100px, 16vw, 220px);
+  width: clamp(100px, 16vw, 200px);
   height: auto;
 }
 
