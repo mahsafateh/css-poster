@@ -2,19 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles.css">
     <title>Harry Potter Book Club</title>
 </head>
 <body>
     <main class="hero">
-        <div class="hero__overlay"></div>
-        <h1 class="hero__title">Harry Potter Book Club</h1>
         <video class="hero__video" autoplay muted loop playsinline>
             <source src="./assets/video/Harry%20Potter%204K%20%7C%20Hogwarts.mp4" type="video/mp4" />
         </video>
-        <img class="hero__logo" src="./assets/image/hp2.svg" alt="Harry Potter Logo" width="100" height="100">
-        <img class="hero__decoration" src="./assets/image/hp.svg" alt="Harry Potter Logo" width="300" height="300">
-    </div>
+        <div class="hero__overlay"></div>
+
+        <header class="hero__header">
+            <img class="hero__logo" src="./assets/image/hp2.svg" alt="Harry Potter Book Club logo" width="200" height="200">
+        </header>
+
+        <div class="hero__content">
+            <h1 class="hero__title">Harry Potter Book Club</h1>
+            <h2 class="hero__subtitle">Welcome to the Harry Potter Book Club!</h2>
+            <p class="hero__text">Join us as we explore the magical world of Harry Potter through reading and discussion.
+                Whether you're a long-time fan or new to the series, there's a place for you in our club.</p>
+            <p class="hero__text">We meet every month to discuss a different book from the series, and we also host special
+                events and activities for our members. Come and be a part of our magical community!</p>
+            <a href="#" class="hero__button">Join Now</a>
+        </div>
+
+        <footer class="hero__footer">
+            <p class="hero__copyright">&copy; 2026 Harry Potter Book Club. All rights reserved.</p>
+            <img class="hero__decoration" src="./assets/image/hp.svg" alt="" width="280" height="280">
+        </footer>
     </main>
 </body>
 </html>
