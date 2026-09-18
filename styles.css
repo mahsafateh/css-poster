@@ -25,11 +25,14 @@
   --font-display: "FifteenTwenty", ui-monospace, monospace;
   --font-body: Georgia, "Iowan Old Style", "Times New Roman", serif;
 
-  /* Type scale: one clear step between each level */
-  --size-title: clamp(1.375rem, 5vw, 3.75rem);
+  /* Type scale: one clear step between each level.
+     The title is sized against its own column, so it never outgrows it. */
+  --size-title: clamp(1.125rem, 6cqw, 3.75rem);
   --size-subtitle: clamp(1.0625rem, 2.2vw, 1.5rem);
+  --size-event-date: clamp(1.125rem, 1.6vw, 1.25rem);
   --size-text: clamp(1rem, 1.2vw, 1.125rem);
   --size-button: clamp(0.875rem, 1.1vw, 1rem);
+  --size-label: clamp(0.6875rem, 0.9vw, 0.8125rem);
   --size-footer: clamp(0.6875rem, 0.9vw, 0.8125rem);
 
   --title-tracking: 0.06em;
@@ -84,13 +87,21 @@ body {
 /* Top-left Harry Potter logo */
 .hero__logo {
   display: block;
-  width: clamp(80px, 11vw, 150px);
+  width: clamp(200px, 11vw, 2000px);
   height: auto;
 }
 
 .hero__content {
   align-self: center;
-  max-width: 60ch;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) min(24rem, 100%);
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+}
+
+/* Sizing context for the title, so it stays inside this column */
+.hero__main {
+  container-type: inline-size;
 }
 
 .hero__title {
@@ -152,14 +163,56 @@ body {
   color: var(--page-background);
 }
 
+/* Event details panel on the right of the hero content */
+.event {
+  padding: clamp(1.25rem, 2vw, 1.75rem);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-top: 3px solid var(--cursor-color);
+  border-radius: 6px;
+  background: rgba(0, 7, 6, 0.45);
+  backdrop-filter: blur(6px);
+}
+
+.event__label {
+  color: var(--cursor-color);
+  font-family: var(--font-display);
+  font-size: var(--size-label);
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.event__date {
+  margin-top: 0.75rem;
+  color: var(--title-color);
+  font-family: var(--font-display);
+  font-size: var(--size-event-date);
+  line-height: 1.3;
+}
+
+.event__time {
+  margin-top: 0.25rem;
+  font-size: var(--size-text);
+}
+
+.event__address {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: var(--size-text);
+  font-style: normal;
+  line-height: 1.5;
+}
+
 .hero__footer {
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: end;
+  gap: 1rem;
 }
 
 .hero__copyright {
+  grid-column: 2;
   padding-bottom: 0.4em;
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
   font-family: var(--font-display);
@@ -167,12 +220,11 @@ body {
   letter-spacing: 0.06em;
 }
 
-/* Bottom-right Harry Potter decoration */
+/* Decoration sits on the footer line, at its right end */
 .hero__decoration {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: clamp(70px, 10vw, 140px);
+  grid-column: 3;
+  justify-self: end;
+  width: clamp(60px, 8vw, 110px);
   height: auto;
   opacity: 0.75;
 }
@@ -201,6 +253,13 @@ body {
   }
 }
 
+/* Event panel drops below the text when there is no room beside it */
+@media (max-width: 900px) {
+  .hero__content {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 @media (max-width: 600px) {
   .hero {
     gap: 1.5rem;
@@ -210,7 +269,19 @@ body {
     --title-tracking: 0.02em;
   }
 
+  .hero__footer {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero__copyright,
   .hero__decoration {
+    grid-column: 1;
+  }
+
+  .hero__decoration {
+    justify-self: center;
     opacity: 0.4;
   }
 }
